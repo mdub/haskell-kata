@@ -8,4 +8,10 @@
 module Wrapper (wrap) where
   
   wrap :: String -> Int -> String
-  wrap s _ = s
+  wrap s n = s
+
+  splits :: [a] -> [([a],[a])]
+  splits [] = [([],[])]
+  splits s@(x:rest) = 
+    ([], s) : map (prepend x) (splits rest) 
+    where prepend x (init,tail) = (x:init,tail)
